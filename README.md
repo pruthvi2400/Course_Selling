@@ -32,12 +32,31 @@ Project Structure
 
 Course_Selling/
 │
-├── admin.js        # Admin routes and logic
-├── user.js         # User routes and logic
-├── course.js       # Course routes and logic
+├── route/
+│   ├── admin.js        # Admin routes and logic
+│   ├── user.js         # User routes and logic
+│   └── course.js       # Course routes and logic
+├── middleware/
+│   ├── admin.js        # Admin auth middleware
+│   └── user.js         # User auth middleware
 ├── backend.js      # Main server entry point
 ├── database.js     # MongoDB connection
 ├── config.js       # Configuration & secrets
 ├── .env.example    # Environment variable template
 ├── package.json
 └── package-lock.json
+
+Getting Started
+
+1) Install dependencies
+   npm install
+
+2) Create a .env file based on .env.example and fill in values:
+   MONGODB_URL=your_mongodb_connection_string
+   JWT_ADMIN_SCERAT=your_admin_jwt_secret
+   JWT_USER_SCERAT=your_user_jwt_secret
+
+3) Start the server
+   npm run start
+
+The server listens on port 4000 by default.
