@@ -1,0 +1,28 @@
+<section class="container">
+  <div *ngIf="loading" class="card">Loading course details...</div>
+  <div *ngIf="errorMessage" class="card error">{{ errorMessage }}</div>
+
+  <div *ngIf="course" class="course-detail card">
+    <div class="course-info">
+      <span class="badge">Top rated</span>
+      <h1>{{ course.title }}</h1>
+      <p class="muted">{{ course.description }}</p>
+    </div>
+    <div class="course-actions">
+      <h2>${{ course.price }}</h2>
+      <button
+        class="btn"
+        type="button"
+        (click)="purchaseCourse()"
+        [disabled]="purchasing || authService.role !== 'USER'"
+      >
+        {{ purchasing ? 'Processing...' : 'Purchase Course' }}
+      </button>
+      <p class="hint" *ngIf="authService.role !== 'USER'">
+        Only users can purchase courses.
+      </p>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </div>
+  </div>
+</section>

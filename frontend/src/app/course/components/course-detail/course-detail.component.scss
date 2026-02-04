@@ -1,0 +1,30 @@
+.course-detail {
+  display: grid;
+  gap: 2rem;
+}
+
+.course-actions {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 320px;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.success {
+  color: #027a48;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .course-detail {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}

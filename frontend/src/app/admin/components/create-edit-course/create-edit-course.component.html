@@ -1,0 +1,35 @@
+<section class="container">
+  <div class="card form-card">
+    <h1>{{ courseId ? 'Edit course' : 'Create course' }}</h1>
+    <p class="muted">{{ courseId ? 'Update course details.' : 'Add a new course to the catalog.' }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-grid">
+      <div class="input-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Course title" />
+        <span class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+          Title is required.
+        </span>
+      </div>
+      <div class="input-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" formControlName="description"></textarea>
+        <span class="error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+          Description is required.
+        </span>
+      </div>
+      <div class="input-group">
+        <label for="price">Price</label>
+        <input id="price" type="number" formControlName="price" min="0" />
+        <span class="error" *ngIf="form.get('price')?.touched && form.get('price')?.invalid">
+          Price must be zero or more.
+        </span>
+      </div>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button class="btn" type="submit" [disabled]="loading">
+        {{ loading ? 'Saving...' : courseId ? 'Update course' : 'Create course' }}
+      </button>
+    </form>
+  </div>
+</section>
