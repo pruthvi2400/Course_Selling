@@ -6,7 +6,8 @@ import { CourseService } from '../../../core/services/course.service';
 @Component({
   selector: 'app-create-edit-course',
   templateUrl: './create-edit-course.component.html',
-  styleUrls: ['./create-edit-course.component.scss']
+  styleUrls: ['./create-edit-course.component.scss'],
+  standalone: false
 })
 export class CreateEditCourseComponent implements OnInit {
   loading = false;

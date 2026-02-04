@@ -5,7 +5,8 @@ import { Course } from '../../../core/models/course.model';
 @Component({
   selector: 'app-purchased-courses',
   templateUrl: './purchased-courses.component.html',
-  styleUrls: ['./purchased-courses.component.scss']
+  styleUrls: ['./purchased-courses.component.scss'],
+  standalone: false
 })
 export class PurchasedCoursesComponent implements OnInit {
   courses: Course[] = [];
