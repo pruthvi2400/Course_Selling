@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../../../core/services/course.service';
 
 @Component({
   selector: 'app-create-edit-course',
   templateUrl: './create-edit-course.component.html',
-  styleUrls: ['./create-edit-course.component.scss']
+  styleUrls: ['./create-edit-course.component.scss'],
+  standalone: false
 })
 export class CreateEditCourseComponent implements OnInit {
   loading = false;
@@ -14,18 +15,20 @@ export class CreateEditCourseComponent implements OnInit {
   successMessage = '';
   courseId: string | null = null;
 
-  form = this.fb.group({
-    title: ['', [Validators.required]],
-    description: ['', [Validators.required]],
-    price: [0, [Validators.required, Validators.min(0)]]
-  });
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private courseService: CourseService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.form = this.fb.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: [0, [Validators.required, Validators.min(0)]]
+    });
+  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
