@@ -61,3 +61,13 @@ Getting Started
 
 The server listens on port 4000 by default.
 
+Frontend (Angular)
+
+1) Install dependencies
+   cd frontend
+   npm install
+
+2) Start the development server
+   npm start
+
+The Angular dev server runs on http://localhost:4200 by default.
