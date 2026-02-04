@@ -1,0 +1,15 @@
+<section class="container">
+  <h1>Purchased courses</h1>
+  <p class="muted">Keep learning with your purchased content.</p>
+
+  <div *ngIf="loading" class="card">Loading purchased courses...</div>
+  <div *ngIf="errorMessage" class="card error">{{ errorMessage }}</div>
+
+  <div class="grid grid-2" *ngIf="!loading && !errorMessage">
+    <div class="card" *ngFor="let course of courses">
+      <h3>{{ course.title }}</h3>
+      <p class="muted">{{ course.description }}</p>
+      <span class="badge">${{ course.price }}</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="container navbar-content">
+    <a class="brand" routerLink="/courses">CourseFlow</a>
+    <div class="links">
+      <a routerLink="/courses">Courses</a>
+      <a routerLink="/purchased" *ngIf="authService.isAuthenticated() && authService.role === 'USER'">
+        Purchased
+      </a>
+      <a routerLink="/admin" *ngIf="authService.role === 'ADMIN'">Admin</a>
+    </div>
+    <div class="actions">
+      <ng-container *ngIf="authService.isAuthenticated(); else guest">
+        <span class="badge">{{ authService.role }}</span>
+        <button class="btn secondary" type="button" (click)="logout()">Logout</button>
+      </ng-container>
+      <ng-template #guest>
+        <a class="btn secondary" routerLink="/login">Login</a>
+        <a class="btn" routerLink="/signup">Sign up</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>
