@@ -11,12 +11,11 @@ const { JWT_ADMIN_SCERAT } = require("../config");
 
 adminRouter.post("/signup", async function(req, res){
      
-    const requiredBody=z.object({
-            email: z.string().min(5).max(20).email(),
-            password: z.string().min(6).max(50),
-            firstName: z.string().min(1).max(30),
-            lastName: z.string().min(1).max(30)
-        })
+    const requiredBody = z.object({
+    email: z.string().email(),
+    password: z.string().min(6)
+    });
+
 
         const parseddatawithsuccess = requiredBody.safeParse(req.body);
 
@@ -29,8 +28,7 @@ adminRouter.post("/signup", async function(req, res){
 
         const email=req.body.email;
         const password=req.body.password;
-        const firstName=req.body.firstName;
-        const lastName=req.body.lastName;
+        
 
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword);
@@ -38,8 +36,7 @@ adminRouter.post("/signup", async function(req, res){
         await adminModel.create({
             email:email,
             password:hashedPassword,
-            firstName:firstName,
-            lastName:lastName
+    
 
         })
 

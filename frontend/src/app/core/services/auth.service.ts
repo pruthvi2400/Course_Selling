@@ -14,7 +14,7 @@ interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly baseUrl = `${environment.apiBaseUrl}/auth`;
+  private readonly baseUrl = `${environment.apiBaseUrl}/users`;
   private userSubject = new BehaviorSubject<User | null>(this.getStoredUser());
   user$ = this.userSubject.asObservable();
 

@@ -9,44 +9,39 @@ const { userMiddleware } = require("../middleware/user");
 
 
 
-    userRouter.post("/signup", async function(req, res){
+    userRouter.post("/signup", async function(req, res) {
 
-        const requiredBody=z.object({
-            email: z.string().min(5).max(20).email(),
-            password: z.string().min(6).max(50),
-            firstName: z.string().min(1).max(30),
-            lastName: z.string().min(1).max(30)
-        })
+    const { email, password } = req.body;
 
-        const parseddatawithsuccess = requiredBody.safeParse(req.body);
+    try {
 
-        if (!parseddatawithsuccess.success){
-            return res.json({
-                message:"The input is Invalid",
-                error:parseddatawithsuccess.error
+        const existingUser = await UserModel.findOne({ email });
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: "User already exists"
             });
         }
 
-        const email=req.body.email;
-        const password=req.body.password;
-        const firstName=req.body.firstName;
-        const lastName=req.body.lastName;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        const hasedPassword = await bcrypt.hash(password, 10);
-        console.log(hasedPassword);
-
-        await UserModel.create({
-            email:email,
-            password:hasedPassword,
-            firstName:firstName,
-            lastName:lastName
-
-        })
+        const newUser = await UserModel.create({
+            email,
+            password: hashedPassword
+        });
 
         res.json({
-            message:"you are logged in"
+            message: "Signup successful"
         });
-    });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+});
+
 
     userRouter.post("/login", async function(req, res){
 
@@ -72,7 +67,9 @@ const { userMiddleware } = require("../middleware/user");
                 id:user._id.toString()
             }, JWT_USER_SCERAT);
             res.json({
-                token
+                token,
+                role: "USER",   
+                email: user.email
             });
         } else {
             res.status(403).json({
