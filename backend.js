@@ -1,8 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { MONGODB_URL } = require("./config");
+const cors = require("cors");
+
 
 const app = express();
+app.use(cors());
+
 
 app.use(express.json());
 
@@ -11,9 +15,9 @@ const { courseRouter } = require("./route/course");
 const { adminRouter } = require("./route/admin");
 
 
-app.use("/user", userRouter);
-app.use("/course", courseRouter);
-app.use("/admin", adminRouter);
+app.use("/users", userRouter);
+app.use("/courses", courseRouter);
+app.use("/admins", adminRouter);
 
 async function main(){
     if (!MONGODB_URL) {
