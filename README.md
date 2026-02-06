@@ -59,5 +59,8 @@ Users can browse courses, view details, and purchase courses. Admins can manage 
 
 <img width="1906" height="865" alt="image" src="https://github.com/user-attachments/assets/ecc3d7fb-9c32-4426-8a6e-2b8e16593b54" />
 
+<img width="1917" height="868" alt="image" src="https://github.com/user-attachments/assets/12f0c49f-e339-4427-97f6-51fd1fcdcda3" />
+
+
 
 
