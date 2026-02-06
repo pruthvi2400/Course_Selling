@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'courses', component: CourseListComponent },
-  { path: 'courses/:id', component: CourseDetailComponent, canActivate: [AuthGuard] },
+  { path: 'courses/:id', component: CourseDetailComponent, },
   { path: 'purchased', component: PurchasedCoursesComponent, canActivate: [AuthGuard] },
   {
     path: 'admin',
