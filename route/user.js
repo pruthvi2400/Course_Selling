@@ -3,7 +3,7 @@ const userRouter = Router();
 const bcrypt = require("bcrypt");
 const { z } = require("zod");
 const jwt = require("jsonwebtoken");
-const { UserModel, purchesModel } = require("../database");
+const { UserModel, purchaseModel } = require("../database");
 const { JWT_USER_SCERAT } = require("../config");
 const { userMiddleware } = require("../middleware/user");
 
@@ -78,10 +78,10 @@ const { userMiddleware } = require("../middleware/user");
         }
     });
 
-    userRouter.get("/purchses", userMiddleware, async function(req, res){
+    userRouter.get("/purchased-courses", userMiddleware, async function(req, res){
 
         const userId = req.userId;
-        const purchaes = await purchesModel.find({
+        const purchaes = await purchaseModel.find({
             userId,
            
         })
